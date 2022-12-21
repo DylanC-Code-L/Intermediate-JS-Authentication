@@ -1,0 +1,24 @@
+{
+  "name": "intermediate-js-authentication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev":"concurrently 'nodemon' 'npm run vite --prefix=client' 'npm run tail --prefix=client'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DylanC-Code-L/Intermediate-JS-Authentication.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DylanC-Code-L/Intermediate-JS-Authentication/issues"
+  },
+  "homepage": "https://github.com/DylanC-Code-L/Intermediate-JS-Authentication#readme",
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}
