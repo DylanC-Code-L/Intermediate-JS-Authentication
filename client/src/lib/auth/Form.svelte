@@ -1,9 +1,14 @@
 <script>
+  import Error from "../Error.svelte";
+  import { validator } from "./Validator.js";
   export let signUp;
 
-  const [formValues, errors] = [{}, {}];
+  let [formValues, errors] = [{ signUp }, {}];
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    if (signUp && formValues.checked) errors = validator(formValues);
+    debugger;
+  };
 </script>
 
 <form on:submit|preventDefault={handleSubmit} class="flex flex-col">
@@ -15,6 +20,7 @@
     placeholder="Enter your email address"
     bind:value={formValues.email}
   />
+  <Error condition={errors.email} text="Email isn't valid" />
 
   {#if signUp}
     <label class="label-auth" for="name">Full name</label>
@@ -25,6 +31,7 @@
       placeholder="Enter your full name"
       bind:value={formValues.name}
     />
+    <Error condition={errors.name} text="Name isn't valid" />
   {/if}
 
   <label class="label-auth" for="password">Password</label>
@@ -35,6 +42,7 @@
     placeholder="Enter your password"
     bind:value={formValues.password}
   />
+  <Error condition={errors.password} text="Password isn't valid" />
 
   {#if signUp}
     <label class="label-auth" for="confirm">Confirm password</label>
@@ -43,7 +51,9 @@
       type="password"
       id="confirm"
       placeholder="Confirm your password"
+      bind:value={formValues.confirm}
     />
+    <Error condition={errors.confirm} text="Passwords don't match" />
 
     <div class="flex items-center">
       <input
@@ -59,6 +69,6 @@
 
     <button class="button-1" disabled={!formValues.checked}>Sign Up</button>
   {:else}
-    <button class="button-1" disabled={!formValues.checked}>Sign In</button>
+    <button class="button-1">Sign In</button>
   {/if}
 </form>
