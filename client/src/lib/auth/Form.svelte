@@ -6,27 +6,59 @@
   const handleSubmit = () => {};
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
-  <label for="email">Email</label><br />
-  <input type="email" id="email" bind:value={formValues.email} /><br />
+<form on:submit|preventDefault={handleSubmit} class="flex flex-col">
+  <label class="label-auth" for="email">Email</label>
+  <input
+    class="input-auth"
+    type="email"
+    id="email"
+    placeholder="Enter your email address"
+    bind:value={formValues.email}
+  />
 
   {#if signUp}
-    <label for="name">Full name</label>
-    <input type="text" id="name" bind:value={formValues.name} />
+    <label class="label-auth" for="name">Full name</label>
+    <input
+      class="input-auth"
+      type="text"
+      id="name"
+      placeholder="Enter your full name"
+      bind:value={formValues.name}
+    />
   {/if}
 
-  <label for="password">Password</label>
-  <input type="password" id="password" bind:value={formValues.password} />
+  <label class="label-auth" for="password">Password</label>
+  <input
+    class="input-auth"
+    type="password"
+    id="password"
+    placeholder="Enter your password"
+    bind:value={formValues.password}
+  />
 
   {#if signUp}
-    <label for="confirm">Confirm password</label>
-    <input type="password" id="confirm" />
+    <label class="label-auth" for="confirm">Confirm password</label>
+    <input
+      class="input-auth"
+      type="password"
+      id="confirm"
+      placeholder="Confirm your password"
+    />
 
-    <input type="checkbox" id="cgv" bind:checked={formValues.checked} />
-    <label for="cgv">Please accept the CGV to continue.</label>
+    <div class="flex items-center">
+      <input
+        class="w-4 h-4 cursor-pointer"
+        type="checkbox"
+        id="cgv"
+        bind:checked={formValues.checked}
+      />
+      <label class="label-auth text-slate-400 ml-2 cursor-pointer" for="cgv"
+        >Please accept the CGV to continue.</label
+      >
+    </div>
 
-    <button disabled={!formValues.checked}>Sign Up</button>
+    <button class="button-1" disabled={!formValues.checked}>Sign Up</button>
   {:else}
-    <button disabled={!formValues.checked}>Sign In</button>
+    <button class="button-1" disabled={!formValues.checked}>Sign In</button>
   {/if}
 </form>
