@@ -1,13 +1,13 @@
 <script>
-  import Password from "$lib/auth/Password.svelte";
-  import { validator } from "$lib/auth/Validator.js";
-  import Email from "$lib/auth/Email.svelte";
+  import Password from "$lib/components/auth/Password.svelte";
+  import { Validator } from "$lib/components/auth/Validator.js";
+  import Email from "$lib/components/auth/Email.svelte";
 
   let [formValues, errors] = [{}, {}];
 
   const handleSubmit = () => {
-    errors = validator(formValues);
-    debugger;
+    errors.email = new Validator(formValues.email).required().email().test();
+    errors.password = new Validator(formValues.password).required().test();
   };
 </script>
 

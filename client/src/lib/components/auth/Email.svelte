@@ -13,4 +13,4 @@
   bind:value={formValues.email}
 />
 
-<Error condition={errors.email} text="Email isn't valid" />
+<Error text={errors.email} />

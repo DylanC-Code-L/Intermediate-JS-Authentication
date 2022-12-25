@@ -14,7 +14,7 @@
     placeholder="Enter your password"
     bind:value={formValues.password}
   />
-  <Error condition={errors.password} text="Password isn't valid !" />
+  <Error text={errors.password} />
 {:else}
   <label class="label-auth" for="confirm">Confirm password</label>
   <input
@@ -24,5 +24,5 @@
     placeholder="Confirm your password"
     bind:value={formValues.confirm}
   />
-  <Error condition={errors.confirm} text="Passwords don't match !" />
+  <Error text={errors.confirm} />
 {/if}

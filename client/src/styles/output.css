@@ -492,6 +492,9 @@ video {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
+.static {
+  position: static;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -499,14 +502,14 @@ video {
 .mb-5 {
   margin-bottom: 1.25rem;
 }
-.ml-2 {
-  margin-left: 0.5rem;
-}
 .mb-8 {
   margin-bottom: 2rem;
 }
 .mt-4 {
   margin-top: 1rem;
+}
+.ml-2 {
+  margin-left: 0.5rem;
 }
 .block {
   display: block;
@@ -554,6 +557,9 @@ video {
 }
 .underline {
   text-decoration-line: underline;
+}
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 * {

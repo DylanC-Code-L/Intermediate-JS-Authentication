@@ -1,14 +1,29 @@
 <script>
-  import Error from "$lib/Error.svelte";
-  import { validator } from "$lib/auth/Validator.js";
-  import Email from "$lib/auth/Email.svelte";
-  import Password from "../../../lib/auth/Password.svelte";
+  import Error from "$lib/components/Error.svelte";
+  import { Validator } from "$lib/components/auth/Validator.js";
+  import Email from "$lib/components/auth/Email.svelte";
+  import Password from "$lib/components/auth/Password.svelte";
 
   let [formValues, errors] = [{}, {}];
 
   const handleSubmit = () => {
-    errors = validator(formValues);
-    debugger;
+    errors.username = new Validator(formValues.username)
+      .required()
+      .username()
+      .minLength(3)
+      .maxLength(20)
+      .test();
+    errors.email = new Validator(formValues.email).required().email().test();
+    errors.password = new Validator(formValues.password)
+      .required()
+      .password()
+      .minLength(8)
+      .maxLength(50)
+      .test();
+    errors.confirm = new Validator(formValues.confirm)
+      .required()
+      .password()
+      .test();
   };
 </script>
 
@@ -21,9 +36,9 @@
     type="text"
     id="name"
     placeholder="Enter your full name"
-    bind:value={formValues.name}
+    bind:value={formValues.username}
   />
-  <Error condition={errors.name} text="Name isn't valid" />
+  <Error text={errors.username} />
 
   <Password bind:formValues bind:errors />
   <Password bind:formValues bind:errors confirmPassword={true} />
@@ -40,5 +55,5 @@
     >
   </div>
 
-  <button class="button-1" disabled={!formValues.checked}>Sign Up</button>
+  <button class="button-1">Sign Up</button>
 </form>
