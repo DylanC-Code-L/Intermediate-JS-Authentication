@@ -2,7 +2,10 @@ import { fail } from "@sveltejs/kit"
 import { Validator } from "$lib/components/auth/Validator.js"
 
 export const actions = {
-  default: async ({ cookies, request }) => {
+  default: async (event) => {
+
+    console.log(event);
+    const { request } = event;
     const data = await request.formData()
     const email = data.get("email")
     const name = data.get("name")
