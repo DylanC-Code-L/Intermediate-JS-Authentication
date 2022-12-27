@@ -1,7 +1,7 @@
 <script>
-  export let text;
+  export let error;
 </script>
 
 <span class="text-red-400 mb-5">
-  {#if text}{text}{/if}
+  {#if error}{error}{/if}
 </span>

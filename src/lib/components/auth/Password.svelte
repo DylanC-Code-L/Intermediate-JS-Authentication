@@ -1,7 +1,8 @@
 <script>
   import Error from "../Error.svelte";
 
-  export let formValues, errors;
+  export let error,
+    value = "";
   export let confirmPassword = false;
 </script>
 
@@ -11,18 +12,20 @@
     class="input-auth"
     type="password"
     id="password"
+    name="password"
+    {value}
     placeholder="Enter your password"
-    bind:value={formValues.password}
   />
-  <Error text={errors.password} />
+  <Error {error} />
 {:else}
   <label class="label-auth" for="confirm">Confirm password</label>
   <input
     class="input-auth"
     type="password"
     id="confirm"
+    name="confirm"
+    {value}
     placeholder="Confirm your password"
-    bind:value={formValues.confirm}
   />
-  <Error text={errors.confirm} />
+  <Error {error} />
 {/if}

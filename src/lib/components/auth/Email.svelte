@@ -1,7 +1,8 @@
 <script>
   import Error from "../Error.svelte";
 
-  export let formValues, errors;
+  export let value = "",
+    error;
 </script>
 
 <label class="label-auth" for="email">Email</label>
@@ -9,8 +10,9 @@
   class="input-auth"
   type="email"
   id="email"
+  name="email"
+  {value}
   placeholder="Enter your email address"
-  bind:value={formValues.email}
 />
 
-<Error text={errors.email} />
+<Error {error} />
