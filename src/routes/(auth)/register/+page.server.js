@@ -1,11 +1,9 @@
-import { fail } from "@sveltejs/kit"
+import { fail, redirect } from "@sveltejs/kit"
 import { Validator } from "$lib/components/auth/Validator.js"
+import { prisma } from "$lib/server/db.js"
 
 export const actions = {
-  default: async (event) => {
-
-    console.log(event);
-    const { request } = event;
+  default: async ({ cookies, request }) => {
     const data = await request.formData()
     const email = data.get("email")
     const name = data.get("name")
@@ -26,5 +24,31 @@ export const actions = {
     if (hasErrors) {
       return fail(400, { errors, email, name, password, confirm, cgv })
     }
+
+    prisma.$connect()
+
+    const user = await prisma.user.findFirst({
+      where: {
+        OR: [
+          { email: email.toLowerCase() },
+          { name: name.toLowerCase() }
+        ]
+      }
+    })
+
+    if (user) {
+      return fail(400, { errors: { email: "Email or username already exists" }, email, name, password, confirm, cgv })
+    }
+
+    const newUser = await prisma.user.create({
+      data: {
+        email: email.toLowerCase(),
+        name: name.toLowerCase(),
+        password: password
+      }
+    })
+
+    cookies.set("session", newUser.id)
+    throw redirect(308, '/')
   }
 }
