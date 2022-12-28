@@ -19,7 +19,7 @@ export class Validator {
   }
 
   username() {
-    if (this.value && !/^[a-zA-Z0-9]+$/i.test(this.value))
+    if (this.value && !/^[a-zA-Z0-9-_]+$/i.test(this.value))
       this.errors.push('Invalid username !')
 
     return this

@@ -9,5 +9,5 @@
   <Email value={form?.email} error={form?.errors?.email} />
   <Password error={form?.errors?.password} />
 
-  <button class="button-1">Sign In</button>
+  <button class="button-1" type="submit">Sign In</button>
 </form>

@@ -6,6 +6,10 @@
   const toggleSignUp = () => (signUp = !signUp);
 </script>
 
+<svelte:head>
+  <title>Authentication</title>
+</svelte:head>
+
 <main class="px-[15vw] py-[10vh]">
   {#if signUp}
     <h1 class="text-4xl mb-8">Create your account</h1>

@@ -43,5 +43,5 @@
     >
   </div>
 
-  <button class="button-1">Sign Up</button>
+  <button class="button-1" type="submit">Sign Up</button>
 </form>
