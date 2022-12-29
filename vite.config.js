@@ -9,8 +9,8 @@ const config = {
 		port: process.env.SERVER_PORT
 	},
 	test: {
-		testTimeout: 3_000,
-		hookTimeout: 3_000,
+		testTimeout: 60_000,
+		hookTimeout: 60_000,
 	}
 };
 
