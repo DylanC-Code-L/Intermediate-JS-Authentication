@@ -5,7 +5,7 @@ export class UserFactory {
     this.name = generateUsername("", 0, 10)
     this.email = this.name + "@test.com"
     this.password = "password"
-    this.confirm = "password2"
+    this.confirm = "password"
 
     return {
       name: this.name,

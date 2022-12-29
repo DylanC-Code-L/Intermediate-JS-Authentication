@@ -1,5 +1,4 @@
 {
   "vitest.enable": true,
-  "vitest.commandLine": "npm test --watch",
-  "testing.automaticallyOpenPeekView": "never"
+  "vitest.commandLine": "npm test --watch"
 }
