@@ -1,6 +1,6 @@
 import { beforeAll, afterAll, describe, test, expect, beforeEach, afterEach } from "vitest";
 import puppeteer from "puppeteer";
-import { UserFactory } from "../factories/user";
+import { fillFields page, } from "../helpers/fillFields"page,;
 
 let page, browser
 
@@ -24,7 +24,7 @@ describe("Register", () => {
   })
 
   test("should fail", async () => {
-    const submit = await fillFields(['email', 'name', 'password', 'confirm'])
+    const submit = await fillFields(page, ['email', 'name', 'password', 'confirm'])
     await submit.click()
 
     await page.waitForNavigation()
@@ -34,7 +34,7 @@ describe("Register", () => {
   })
 
   test("should pass", async () => {
-    const submit = await fillFields(['email', 'name', 'password', 'confirm', 'cgv'])
+    const submit = await fillFields(page, ['email', 'name', 'password', 'confirm', 'cgv'])
     await submit.click()
 
     await page.waitForNavigation()
@@ -43,26 +43,3 @@ describe("Register", () => {
     expect(h1).toEqual("You are login")
   })
 })
-
-const getFields = async () => {
-  const email = await page.$('input[name="email"]')
-  const name = await page.$('input[name="name"]')
-  const password = await page.$('input[name="password"]')
-  const confirm = await page.$('input[name="confirm"]')
-  const cgv = await page.$('input[name="cgv"]')
-  const submit = await page.$('button[type="submit"]')
-
-  return { email, name, password, confirm, cgv, submit }
-}
-
-const fillFields = async (fields) => {
-  const user = new UserFactory()
-  const inputFields = await getFields()
-
-  for await (const field of fields) {
-    if (field === 'cgv') await inputFields[field].click()
-    else await inputFields[field].type(user[field])
-  }
-
-  return await inputFields.submit
-}

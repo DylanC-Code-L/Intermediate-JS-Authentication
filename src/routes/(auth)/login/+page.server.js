@@ -1,5 +1,6 @@
 import { Validator } from "$lib/components/auth/Validator.js";
-import { json, fail } from "@sveltejs/kit";
+import { fail, redirect } from "@sveltejs/kit";
+import { prisma } from "$lib/server/db.js"
 
 export const actions = {
   default: async ({ cookies, request }) => {
@@ -17,5 +18,14 @@ export const actions = {
     if (hasErrors) {
       return fail(400, { errors, email })
     }
+
+    const user = await prisma.user.findFirst({ where: { email } })
+
+    if (!user || user.password !== password) {
+      return fail(400, { errors: { global: 'Email or password incorrect !' }, email })
+    }
+
+    cookies.set('session', user.id)
+    throw redirect(308, '/')
   }
 }
